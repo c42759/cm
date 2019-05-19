@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Unit Test</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</head>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<form>
+						<div class="form-group">
+							<label for="input-name">Name</label>
+							<input type="text" class="form-control" id="input-name" placeholder="eg.: Carlos Santos">
+						</div>
+						<div class="form-group">
+							<label for="input-name">Response</label>
+							<code id="code-name"></code>
+							<span id="date-name"></span>
+						</div>
+						<button type="submit" class="btn btn-primary float-right" id="submit-name">Save Name</button>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<form>
+						<div class="form-group">
+							<label for="input-number">Number</label>
+							<input type="number" class="form-control" id="input-number" placeholder="eg.: 123">
+						</div>
+						<div class="form-group">
+							<label for="input-number">Response</label>
+							<code id="code-number"></code>
+							<span id="date-number"></span>
+						</div>
+						<button type="submit" class="btn btn-primary float-right" id="submit-number">Save Number</button>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<form>
+						<div class="form-group">
+							<label for="input-email">Email</label>
+							<input type="email" class="form-control" id="input-email" placeholder="eg.: c42759@gmail.com">
+						</div>
+						<div class="form-group">
+							<label for="input-email">Response</label>
+							<code id="code-email"></code>
+							<span id="date-email"></span>
+						</div>
+						<button type="submit" class="btn btn-primary float-right" id="submit-email">Save Email</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	<body>
+		<script type="text/javascript">
+			$(document).ready(() => {
+				// NAME
+				$('body').on('click', '#submit-name', function(e) {
+					e.preventDefault();
+
+					$.post('http://localhost:8080/api/name', { name : $('#input-name').val() }, (data) => {
+						console.log(data);
+						$('#code-name').html(data);
+						$('#date-name').html(new Date())
+					});
+				});
+
+				// NUMER
+				$('body').on('click', '#submit-number', function(e) {
+					e.preventDefault();
+
+					$.post('http://localhost:8080/api/number', { number : $('#input-number').val() }, (data) => {
+						console.log(data);
+						$('#code-number').html(data);
+						$('#date-number').html(new Date())
+					});
+				});
+
+				// EMAIL
+				$('body').on('click', '#submit-email', function(e) {
+					e.preventDefault();
+
+					$.post('http://localhost:8080/api/email', { email : $('#input-email').val() }, (data) => {
+						console.log(data);
+						$('#code-email').html(data);
+						$('#date-email').html(new Date())
+					});
+				});
+			});
+		</script>
+		<style media="screen">
+			code {
+				display: block;
+				background-color: lightgray;
+				color: #333;
+				border-radius: 4px;
+				padding: 15px;
+			}
+		</style>
+	</body>
+</html>
